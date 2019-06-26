@@ -52,6 +52,10 @@ public class CoinAdapter extends RecyclerView.Adapter<CoinAdapter.CoinViewHolder
                 Intent intent = new Intent(context,WalletActivity.class);
                 intent.putExtra(Constants.WALLET_NAME_KEY,list.get(position).name);
                 intent.putExtra(Constants.COlOR_ID,list.get(position).colorId);
+                intent.putExtra(Constants.BALANCE,list.get(position).balance);
+                Log.d("BALANCE IN ADAPTER", list.get(position).balance);
+                intent.putExtra(Constants.ADDRESS,list.get(position).address);
+                intent.putExtra(Constants.TRANSACTION_OBJECT,list.get(position).walletJsonObject);
                 context.startActivity(intent);
             }
         });

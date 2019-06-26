@@ -20,5 +20,31 @@ public class Constants {
 
     public static String COlOR_ID = "color";
 
+    public static String ADDRESS = "address";
+
+    public static String BALANCE = "balance";
+
+    public static String TRANSACTION_OBJECT = "transaction";
+
+    /*** URLs ***/
+
+    public static String CREATE_SAVE_NODE_WALLET_URL = "http://144.217.182.179:8090/api/savenode/CreateWallet";
+
+    public static String GET_BALANCE_SAVE_NODE = "http://144.217.182.179:8090/api/savenode/getBalance/";
+
+    public static String TRANSFER = "http://144.217.182.179:8090/api/savenode/transfer";
+
+    /*** wallet information ***/
+
+    // save node
+
+    public static String SAVE_NODE_WALLET_OBJECT_KEY = "saveNodeWallet";
+
+    public static String SAVE_NODE_WALLET_BALANCE_KEY = "saveNodeWalletBalance";
+
+    public static String SAVE_NODE_WALLET_ADDRESS = "saveNodeWalletAddress";
+
+
+
 }
 

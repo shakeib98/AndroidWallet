@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
 import com.example.androidwallet.R;
@@ -15,7 +16,7 @@ import java.io.Console;
 
 public class MainActivity extends AppCompatActivity {
 
-    private String className = MainActivity.class.getName();
+    private String TAG = MainActivity.class.getName();
 
     CustomButton signIn,signUp;
 
@@ -31,10 +32,15 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initViews(){
-        if(SharedPrefsWallet.getStrings(this,Constants.STATUS).equals(Constants.ONLINE)){
-            startActivity(new Intent(this,HomeActivity.class));
-            finish();
+        try{
+            if(SharedPrefsWallet.getStrings(this,Constants.STATUS).equals(Constants.ONLINE)){
+                startActivity(new Intent(this,HomeActivity.class));
+                finish();
+            }
+        }catch (Exception e){
+            Log.d(TAG, "No key detected");
         }
+
 
         signIn = findViewById(R.id.button_new_wallet);
         signUp = findViewById(R.id.button_recover_wallet);

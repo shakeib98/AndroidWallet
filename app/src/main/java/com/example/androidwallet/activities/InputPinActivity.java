@@ -5,12 +5,19 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.example.androidwallet.constants.Constants;
 import com.example.androidwallet.presenter.customViews.BaseTextView;
 import com.example.androidwallet.presenter.customViews.CustomButton;
 import com.example.androidwallet.sharedPrefs.SharedPrefsWallet;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 
 import android.util.Log;
 import android.view.View;
@@ -18,6 +25,14 @@ import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.example.androidwallet.R;
+import com.example.androidwallet.volleySingleton.VolleySingleton;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class InputPinActivity extends AppCompatActivity {
 
@@ -60,7 +75,7 @@ public class InputPinActivity extends AppCompatActivity {
 
     @SuppressLint("SetTextI18n")
     void initViews() {
-
+        context = InputPinActivity.this;
 
         digit1 = findViewById(R.id.digit1);
         digit2 = findViewById(R.id.digit2);
@@ -82,7 +97,7 @@ public class InputPinActivity extends AppCompatActivity {
         num9 = findViewById(R.id.num9);
         delete = findViewById(R.id.delete);
 
-        context = InputPinActivity.this;
+
 
         title = findViewById(R.id.title);
         desciption = findViewById(R.id.description);
@@ -98,11 +113,13 @@ public class InputPinActivity extends AppCompatActivity {
                 title.setText("ENTER PIN");
                 desciption.setText("Enter PIN to access your wallet");
                 Log.d(TAG, title.getText().toString());
-                ;
             } else {
                 signUp = true;
                 intentValue = Constants.CREATE_VALUE;
                 Log.d(TAG, title.getText().toString());
+                if(!SharedPrefsWallet.getStrings(context,Constants.PIN_KEY).isEmpty()){
+                    Toast.makeText(context,"ALREADY WALLET EXIST, SIGNING UP WILL DESTROY PREVIOUS DATA",Toast.LENGTH_SHORT).show();
+                }
             }
         } catch (Exception e) {
             Log.d(TAG, "EMPTY INTENT");
@@ -706,9 +723,9 @@ public class InputPinActivity extends AppCompatActivity {
             Toast.makeText(context, "PIN IS OKAY", Toast.LENGTH_SHORT).show();
             Log.d(TAG, confirmPin);
             SharedPrefsWallet.putString(context,Constants.PIN_KEY,pin);
+            createWallet();
             setDotsEmpty();
-            startActivity(new Intent(InputPinActivity.this,MainActivity.class));
-            finish();
+
         } else {
             Toast.makeText(context, "INVALID PIN", Toast.LENGTH_SHORT).show();
             setDotsEmpty();
@@ -722,8 +739,9 @@ public class InputPinActivity extends AppCompatActivity {
         if(pin.equals(SharedPrefsWallet.getStrings(context,Constants.PIN_KEY))){
             Toast.makeText(context,"PIN IS OKAY!",Toast.LENGTH_SHORT).show();
             SharedPrefsWallet.putString(context,Constants.STATUS,Constants.ONLINE);
-            startActivity(new Intent(InputPinActivity.this,HomeActivity.class));
-            finish();
+            getBalance();
+
+
         }else{
             Toast.makeText(context,"INVALID PIN",Toast.LENGTH_SHORT).show();
             setDotsEmpty();
@@ -751,6 +769,66 @@ public class InputPinActivity extends AppCompatActivity {
         flag4 = false;
         flag5 = false;
         flag6 = false;
+    }
+
+    void createWallet(){
+        StringRequest stringRequest = new StringRequest(Request.Method.GET,Constants.CREATE_SAVE_NODE_WALLET_URL,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        Log.d(TAG, response);
+                        SharedPrefsWallet.putString(context,Constants.SAVE_NODE_WALLET_OBJECT_KEY,response);
+                        try{
+                            JSONObject jsonObject = new JSONObject(response);
+                            JSONObject dataObject = jsonObject.getJSONObject("data");
+                            SharedPrefsWallet.putString(context,Constants.SAVE_NODE_WALLET_ADDRESS,dataObject.optString("address"));
+                            Log.d(TAG, "Address: "+ SharedPrefsWallet.getStrings(context,Constants.SAVE_NODE_WALLET_ADDRESS));
+                        } catch (Exception e){
+
+                        }
+                        startActivity(new Intent(InputPinActivity.this,MainActivity.class));
+                        finish();
+
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.d(TAG, error.toString());
+//                        Log.d(TAG, String.valueOf(error.networkResponse.statusCode));
+                    }
+                });
+        VolleySingleton.getInstance(context).addToRequestQueue(stringRequest);
+    }
+
+    void getBalance(){
+        StringRequest stringRequest = new StringRequest(Request.Method.GET,Constants.GET_BALANCE_SAVE_NODE+"SPaWzGJgQ6ThNH71GF1V2qTtRdTdxVV1JG",
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        Log.d(TAG, response);
+                        SharedPrefsWallet.putString(context,Constants.SAVE_NODE_WALLET_BALANCE_KEY,response);
+//                        try{
+//                            JSONObject jsonObject = new JSONObject(response);
+//                            JSONObject dataObject = jsonObject.getJSONObject("data");
+//                            SharedPrefsWallet.putString(context,Constants.SAVE_NODE_WALLET_ADDRESS,dataObject.optString("address"));
+//                            Log.d(TAG, "Address: "+ SharedPrefsWallet.getStrings(context,Constants.SAVE_NODE_WALLET_ADDRESS));
+//                        } catch (Exception e){
+//
+//                        }
+                        startActivity(new Intent(InputPinActivity.this,HomeActivity.class));
+                        finish();
+
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.d(TAG, error.toString());
+//                        Log.d(TAG, String.valueOf(error.networkResponse.statusCode));
+                    }
+                });
+        VolleySingleton.getInstance(context).addToRequestQueue(stringRequest);
     }
 
 }
