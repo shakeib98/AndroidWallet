@@ -49,14 +49,18 @@ public class CoinAdapter extends RecyclerView.Adapter<CoinAdapter.CoinViewHolder
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(context,WalletActivity.class);
-                intent.putExtra(Constants.WALLET_NAME_KEY,list.get(position).name);
-                intent.putExtra(Constants.COlOR_ID,list.get(position).colorId);
-                intent.putExtra(Constants.BALANCE,list.get(position).balance);
-                Log.d("BALANCE IN ADAPTER", list.get(position).balance);
-                intent.putExtra(Constants.ADDRESS,list.get(position).address);
-                intent.putExtra(Constants.TRANSACTION_OBJECT,list.get(position).walletJsonObject);
-                context.startActivity(intent);
+
+                // temporary to avoid crashes
+                if((list.get(position).name.equals("SAVE NODE")) || (list.get(position).name.equals("BITCOIN"))){
+                    Intent intent = new Intent(context,WalletActivity.class);
+                    intent.putExtra(Constants.WALLET_NAME_KEY,list.get(position).name);
+                    intent.putExtra(Constants.COlOR_ID,list.get(position).colorId);
+                    intent.putExtra(Constants.BALANCE,list.get(position).balance);
+                    Log.d("BALANCE IN ADAPTER", list.get(position).balance);
+                    intent.putExtra(Constants.ADDRESS,list.get(position).address);
+                    intent.putExtra(Constants.TRANSACTION_OBJECT,list.get(position).walletJsonObject);
+                    context.startActivity(intent);
+                }
             }
         });
     }

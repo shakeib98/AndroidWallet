@@ -17,16 +17,34 @@
         android:layout_marginTop="60dp"
         android:id="@+id/logo"
         android:background="@drawable/brd_logo_gradient"/>
-    <ImageView
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:src="@drawable/log_out"
-        android:layout_alignEnd="@id/logo"
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
         android:layout_alignParentEnd="true"
-        android:layout_marginEnd="30dp"
-        android:layout_marginTop="75dp"
-        android:id="@+id/logout"
-        />
+        >
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/log_out"
+            android:layout_gravity="end"
+            android:layout_marginEnd="30dp"
+            android:layout_marginTop="75dp"
+            android:id="@+id/logout"
+            />
+        <com.example.androidwallet.presenter.customViews.BaseTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="17dp"
+            android:layout_marginStart="20dp"
+            android:text="Log Out"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            app:customTFont="CircularPro-Book.otf" />
+
+
+    </LinearLayout>
+
 
 
     <androidx.recyclerview.widget.RecyclerView
@@ -35,5 +53,94 @@
         android:id="@+id/recyclerView"
         android:layout_below="@+id/logo"
         />
+
+    <ProgressBar
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_centerInParent="true"
+        android:id="@+id/progress"
+        />
+    <TableLayout
+        android:id="@+id/menu_table"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="?attr/primary_background"
+        android:clickable="true"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:padding="8dp"
+        android:stretchColumns="0,1,2">
+
+        <TableRow>
+
+            <LinearLayout
+                android:id="@+id/buy_layout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_buy_cash"/>
+
+                <com.example.androidwallet.presenter.customViews.BaseTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="@string/HomeScreen.buy"
+                    android:textColor="@color/sync_toolbar_retry_text"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/trade_layout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@drawable/ic_trade"/>
+
+                <com.example.androidwallet.presenter.customViews.BaseTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="@string/HomeScreen.trade"
+                    android:textColor="@color/sync_toolbar_retry_text"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/menu_layout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="4dp"
+                    android:background="@drawable/ic_menu"/>
+
+                <com.example.androidwallet.presenter.customViews.BaseTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="@string/HomeScreen.menu"
+                    android:textColor="@color/sync_toolbar_retry_text"/>
+            </LinearLayout>
+
+        </TableRow>
+
+    </TableLayout>
 
 </RelativeLayout>

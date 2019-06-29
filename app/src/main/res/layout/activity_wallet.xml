@@ -1,54 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.WalletActivity"
-    tools:showIn="@layout/activity_wallet"
     android:background="#E6D8D8"
-    >
+    tools:context=".activities.WalletActivity"
+    tools:showIn="@layout/activity_wallet">
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
         <LinearLayout
+            android:id="@+id/topLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/topLayout"
-            android:orientation="vertical"
-            android:background="@color/bitcoin"
             android:layout_alignParentStart="true"
-            >
+            android:background="@color/bitcoin"
+            android:orientation="vertical">
 
             <!--<com.example.androidwallet.presenter.customViews.BaseTextView-->
-                <!--android:id="@+id/currency_label"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_marginTop="16dp"-->
-                <!--android:textColor="@color/white"-->
-                <!--android:textSize="@dimen/header"-->
-                <!--tools:text="BITCOIN"-->
-              <!--/>-->
+            <!--android:id="@+id/currency_label"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginTop="16dp"-->
+            <!--android:textColor="@color/white"-->
+            <!--android:textSize="@dimen/header"-->
+            <!--tools:text="BITCOIN"-->
+            <!--/>-->
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                >
+                android:layout_height="wrap_content">
+
                 <LinearLayout
                     android:layout_width="wrap_content"
-                    android:layout_weight="0.65"
                     android:layout_height="wrap_content"
                     android:layout_alignParentStart="true"
-                    >
+                    android:layout_weight="0.65">
+
                     <ImageButton
                         android:id="@+id/back_icon"
                         android:layout_width="58dp"
                         android:layout_height="58dp"
                         android:layout_marginStart="10dp"
-                        android:background="@drawable/ic_chevron_left_white_24dp"
-                        android:padding="10dp"
                         android:layout_marginTop="30dp"
-                        />
+                        android:background="@drawable/ic_chevron_left_white_24dp"
+                        android:padding="10dp" />
                 </LinearLayout>
 
 
@@ -56,213 +55,259 @@
                     android:id="@+id/wallet_label"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginTop="32dp"
                     android:text="BITCOIN"
                     android:textColor="@color/white"
                     android:textSize="22dp"
-                    android:layout_marginTop="32dp"
-                    app:customTFont="CircularPro-Book.otf"
+                    app:customTFont="CircularPro-Book.otf" />
+                <com.example.androidwallet.presenter.customViews.BaseTextView
+                    android:id="@+id/tradeValue"
+                    android:layout_below="@id/wallet_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
-                    />
+                    android:text="$0.00"
+                    android:textColor="@color/white"
+                    android:textSize="14dp"
+                    app:customTFont="CircularPro-Book.otf" />
 
             </RelativeLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
                 android:layout_marginBottom="30dp"
-                >
-                <com.example.androidwallet.presenter.customViews.BaseTextView
-                    android:id="@+id/balance"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="11dp"
-                    android:layout_marginStart="20dp"
-                    android:text="BALANCE: 0"
-                    android:textColor="@color/white"
-                    android:textSize="18sp"
-                    app:customTFont="CircularPro-Book.otf" />
+                android:orientation="vertical">
+
                 <com.example.androidwallet.presenter.customViews.BaseTextView
                     android:id="@+id/address"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="11dp"
                     android:layout_marginStart="20dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="11dp"
                     android:text="ADDRESS: 0"
                     android:textColor="@color/white"
-                    android:textSize="18sp"
-                    android:layout_marginTop="10dp"
+                    android:textSize="15sp"
+                    android:visibility="gone"
+                    app:customTFont="CircularPro-Book.otf" />
+
+                <com.example.androidwallet.presenter.customViews.BaseTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="11dp"
+                    android:text="BALANCE:"
+                    android:textColor="@color/white"
+                    android:textSize="14sp"
+                    app:customTFont="CircularPro-Book.otf" />
+
+                <com.example.androidwallet.presenter.customViews.BaseTextView
+                    android:id="@+id/balance"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="11dp"
+                    android:text="BALANCE: 0"
+                    android:textColor="@color/white"
+                    android:textSize="28sp"
+                    android:textStyle="bold"
                     app:customTFont="CircularPro-Book.otf" />
 
             </LinearLayout>
 
 
-
-
-
-
-
             <!--<com.example.androidwallet.presenter.customViews.BaseTextView-->
-                <!--android:id="@+id/balance_primary"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_marginEnd="16dp"-->
-                <!--android:minHeight="70dp"-->
-                <!--android:paddingTop="8dp"-->
-                <!--android:text="$26,495.69"-->
-                <!--android:textColor="@color/white"-->
-                <!--android:textSize="22sp"-->
-                <!--app:customTFont="CircularPro-Bold.otf"-->
-                <!--/>-->
+            <!--android:id="@+id/balance_primary"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginEnd="16dp"-->
+            <!--android:minHeight="70dp"-->
+            <!--android:paddingTop="8dp"-->
+            <!--android:text="$26,495.69"-->
+            <!--android:textColor="@color/white"-->
+            <!--android:textSize="22sp"-->
+            <!--app:customTFont="CircularPro-Bold.otf"-->
+            <!--/>-->
 
 
             <!--<ImageButton-->
-                <!--android:id="@+id/swap"-->
-                <!--android:layout_width="14dp"-->
-                <!--android:layout_height="14dp"-->
-                <!--android:layout_marginBottom="30dp"-->
-                <!--android:layout_marginEnd="8dp"-->
-                <!--android:layout_marginStart="8dp"-->
-                <!--android:background="@drawable/ic_swap_horizontal"-->
-                <!--/>-->
-
-            <!--<com.example.androidwallet.presenter.customViews.BaseTextView-->
-                <!--android:id="@+id/balance_secondary"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_marginStart="28dp"-->
-                <!--android:maxLines="1"-->
-                <!--android:minHeight="70dp"-->
-                <!--android:paddingBottom="20dp"-->
-                <!--android:paddingTop="18dp"-->
-                <!--android:text="1.56739 BTC"-->
-                <!--android:textColor="@color/trans_white"-->
-                <!--android:textSize="16sp"-->
-                <!--app:customTFont="CircularPro-Book.otf"-->
-                <!--/>-->
-
-
-            <!--<ImageButton-->
-                <!--android:id="@+id/search_icon"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_marginBottom="98dp"-->
-                <!--android:layout_marginLeft="10dp"-->
-                <!--android:background="@drawable/ic_search_white_24dp"-->
-                <!--app:layout_constraintBottom_toBottomOf="parent"-->
-                <!--app:layout_constraintEnd_toEndOf="parent"/>-->
-        </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_below="@id/topLayout"
-        android:id="@+id/buttonLayout"
-        >
-
-        <!--<Button-->
-            <!--android:id="@+id/send_button"-->
-            <!--android:layout_width="0dp"-->
-            <!--android:layout_height="60dp"-->
-            <!--android:layout_gravity="center_vertical"-->
-            <!--android:layout_marginBottom="16dp"-->
+            <!--android:id="@+id/swap"-->
+            <!--android:layout_width="14dp"-->
+            <!--android:layout_height="14dp"-->
+            <!--android:layout_marginBottom="30dp"-->
             <!--android:layout_marginEnd="8dp"-->
             <!--android:layout_marginStart="8dp"-->
-            <!--android:layout_marginTop="22dp"-->
-            <!--android:layout_weight="1.5"-->
-            <!--android:textStyle="bold"-->
-            <!--android:text="@string/Button.send"-->
-            <!--android:textColor="@color/white"-->
-            <!--android:textSize="14sp"-->
+            <!--android:background="@drawable/ic_swap_horizontal"-->
             <!--/>-->
-            <!--&lt;!&ndash;app:buttonType="4"&ndash;&gt;-->
-            <!--&lt;!&ndash;app:customTFont="CircularPro-Bold.otf"&ndash;&gt;-->
-            <!--&lt;!&ndash;app:hasShadow="false"&ndash;&gt;-->
-            <!--&lt;!&ndash;app:isBreadButton="true"/>&ndash;&gt;-->
 
+            <!--<com.example.androidwallet.presenter.customViews.BaseTextView-->
+            <!--android:id="@+id/balance_secondary"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginStart="28dp"-->
+            <!--android:maxLines="1"-->
+            <!--android:minHeight="70dp"-->
+            <!--android:paddingBottom="20dp"-->
+            <!--android:paddingTop="18dp"-->
+            <!--android:text="1.56739 BTC"-->
+            <!--android:textColor="@color/trans_white"-->
+            <!--android:textSize="16sp"-->
+            <!--app:customTFont="CircularPro-Book.otf"-->
+            <!--/>-->
+
+
+            <!--<ImageButton-->
+            <!--android:id="@+id/search_icon"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginBottom="98dp"-->
+            <!--android:layout_marginLeft="10dp"-->
+            <!--android:background="@drawable/ic_search_white_24dp"-->
+            <!--app:layout_constraintBottom_toBottomOf="parent"-->
+            <!--app:layout_constraintEnd_toEndOf="parent"/>-->
+        </LinearLayout>
+
+
+
+        <!--<com.google.android.material.textfield.TextInputLayout-->
+        <!--style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"-->
+        <!--android:id="@+id/textInputLayoutTo"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--app:boxStrokeColor="@color/bitcoin"-->
+        <!--android:layout_below="@id/buttonLayout"-->
+        <!--android:layout_margin="10dp"-->
+        <!--&gt;-->
+
+        <!--<com.example.androidwallet.presenter.customViews.CustomEditText-->
+            <!--android:id="@+id/editTextTo"-->
+            <!--style="@style/ThemeOverlay.MaterialComponents.TextInputEditText.OutlinedBox"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="80dp"-->
+            <!--android:layout_below="@id/buttonLayout"-->
+            <!--android:layout_margin="10dp"-->
+            <!--android:hint="To:"-->
+            <!--android:maxLength="255" />-->
+
+
+        <!--</com.google.android.material.textfield.TextInputLayout>-->
+
+        <!--<com.google.android.material.textfield.TextInputLayout-->
+        <!--style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"-->
+        <!--android:id="@+id/textInputLayoutAmount"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--app:boxStrokeColor="@color/bitcoin"-->
+        <!--android:layout_below="@id/textInputLayoutTo"-->
+
+        <!--android:layout_margin="10dp"-->
+        <!--&gt;-->
+
+        <!--<com.example.androidwallet.presenter.customViews.CustomEditText-->
+            <!--android:id="@+id/amountEditText"-->
+            <!--style="@style/ThemeOverlay.MaterialComponents.TextInputEditText.OutlinedBox"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="60dp"-->
+            <!--android:layout_below="@id/editTextTo"-->
+            <!--android:layout_margin="10dp"-->
+            <!--android:hint="Amount:"-->
+            <!--android:inputType="numberDecimal"-->
+            <!--android:maxLength="255" />-->
+
+        <!--</com.google.android.material.textfield.TextInputLayout>-->
 
         <!--<Button-->
-            <!--android:id="@+id/receive_button"-->
-            <!--android:layout_width="0dp"-->
+            <!--android:id="@+id/send_transaction_button"-->
+            <!--android:layout_width="match_parent"-->
             <!--android:layout_height="60dp"-->
+            <!--android:layout_below="@id/amountEditText"-->
             <!--android:layout_gravity="center_vertical"-->
-            <!--android:layout_marginBottom="16dp"-->
-            <!--android:layout_marginEnd="8dp"-->
-            <!--android:layout_marginTop="22dp"-->
-            <!--android:layout_weight="1.5"-->
-            <!--android:text="@string/Button.receive"-->
+            <!--android:layout_margin="10dp"-->
+            <!--android:background="@color/blue"-->
+            <!--android:text="Send Transaction"-->
             <!--android:textColor="@color/white"-->
             <!--android:textSize="14sp"-->
-            <!--android:textStyle="bold"-->
-            <!--/>-->
-            <!--app:buttonType="4"-->
-            <!--app:customTFont="CircularPro-Bold.otf"-->
-            <!--app:hasShadow="false"-->
-            <!--app:isBreadButton="true"/>-->
+            <!--android:textStyle="bold" />-->
 
 
+
+        <RelativeLayout
+            android:id="@+id/darkLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#11E2D9D9"
+            android:visibility="gone">
+
+            <ProgressBar
+                android:id="@+id/progress"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+
+                android:layout_centerInParent="true" />
+        </RelativeLayout>
+
+
+    </RelativeLayout>
+
+
+    <LinearLayout
+        android:id="@+id/buttonLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/topLayout"
+        android:orientation="horizontal"
+        android:layout_gravity="bottom"
+        >
+
+        <Button
+            android:id="@+id/send_button"
+            android:layout_width="0dp"
+            android:layout_height="60dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginBottom="16dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="22dp"
+            android:layout_weight="1.5"
+            android:textStyle="bold"
+            android:text="@string/Button.send"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            />
+        <!--app:buttonType="4"-->
+        <!--app:customTFont="CircularPro-Bold.otf"-->
+        <!--app:hasShadow="false"-->
+        <!--app:isBreadButton="true"/>-->
+
+
+        <Button
+            android:id="@+id/receive_button"
+            android:layout_width="0dp"
+            android:layout_height="60dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginBottom="16dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginTop="22dp"
+            android:layout_weight="1.5"
+            android:text="@string/Button.receive"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            />
+        <!--app:buttonType="4"-->
+        <!--app:customTFont="CircularPro-Bold.otf"-->
+        <!--app:hasShadow="false"-->
+        <!--app:isBreadButton="true"/>-->
 
 
     </LinearLayout>
+    <include
 
-    <com.google.android.material.textfield.TextInputLayout
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:id="@+id/textInputLayoutTo"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:boxStrokeColor="@color/bitcoin"
-        android:layout_below="@id/buttonLayout"
-        android:layout_margin="10dp"
-        >
-
-        <EditText
-            android:id="@+id/editTextTo"
-            android:maxLength="255"
-            style="@style/ThemeOverlay.MaterialComponents.TextInputEditText.OutlinedBox"
-            android:layout_width="match_parent"
-            android:layout_height="80dp"
-            android:hint="To:" />
-
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:id="@+id/textInputLayoutAmount"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:boxStrokeColor="@color/bitcoin"
-        android:layout_below="@id/textInputLayoutTo"
-
-        android:layout_margin="10dp"
-        >
-
-        <EditText
-            android:id="@+id/amountEditText"
-            android:inputType="numberDecimal"
-            android:maxLength="255"
-            style="@style/ThemeOverlay.MaterialComponents.TextInputEditText.OutlinedBox"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:hint="Amount:" />
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <Button
-        android:id="@+id/send_transaction_button"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_gravity="center_vertical"
-        android:layout_margin="10dp"
-        android:background="@color/blue"
-        android:layout_below="@id/textInputLayoutAmount"
-        android:text="Send Transaction"
-        android:textColor="@color/white"
-        android:textSize="14sp"
-        android:textStyle="bold"
+        layout="@layout/bottom_sheet_send"
         />
-
-
-
-</RelativeLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -5,11 +5,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
-import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.example.androidwallet.constants.Constants;
 import com.example.androidwallet.presenter.customViews.BaseTextView;
@@ -17,7 +15,6 @@ import com.example.androidwallet.presenter.customViews.CustomButton;
 import com.example.androidwallet.sharedPrefs.SharedPrefsWallet;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
 
 import android.util.Log;
 import android.view.View;
@@ -27,12 +24,7 @@ import android.widget.Toast;
 import com.example.androidwallet.R;
 import com.example.androidwallet.volleySingleton.VolleySingleton;
 
-import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.util.HashMap;
-import java.util.Map;
 
 public class InputPinActivity extends AppCompatActivity {
 
@@ -98,7 +90,6 @@ public class InputPinActivity extends AppCompatActivity {
         delete = findViewById(R.id.delete);
 
 
-
         title = findViewById(R.id.title);
         desciption = findViewById(R.id.description);
 
@@ -117,8 +108,8 @@ public class InputPinActivity extends AppCompatActivity {
                 signUp = true;
                 intentValue = Constants.CREATE_VALUE;
                 Log.d(TAG, title.getText().toString());
-                if(!SharedPrefsWallet.getStrings(context,Constants.PIN_KEY).isEmpty()){
-                    Toast.makeText(context,"ALREADY WALLET EXIST, SIGNING UP WILL DESTROY PREVIOUS DATA",Toast.LENGTH_SHORT).show();
+                if (!SharedPrefsWallet.getStrings(context, Constants.PIN_KEY).isEmpty()) {
+                    Toast.makeText(context, "ALREADY WALLET EXIST, SIGNING UP WILL DESTROY PREVIOUS DATA", Toast.LENGTH_SHORT).show();
                 }
             }
         } catch (Exception e) {
@@ -170,7 +161,7 @@ public class InputPinActivity extends AppCompatActivity {
                             Toast.makeText(context, "ENTER PIN AGAIN", Toast.LENGTH_SHORT).show();
                         } else if (signUp && !confirmPin.isEmpty()) {
                             checkPINS(confirmPin, pin);
-                        }else if(signIn){
+                        } else if (signIn) {
                             Log.d(TAG, "IN CONDITION");
                             checkPINFromSharedPrefs(pin);
                         }
@@ -224,11 +215,11 @@ public class InputPinActivity extends AppCompatActivity {
                                 Toast.makeText(context, "ENTER PIN AGAIN", Toast.LENGTH_SHORT).show();
                             } else if (signUp && !confirmPin.isEmpty()) {
                                 checkPINS(confirmPin, pin);
-                            }else if(signIn){
+                            } else if (signIn) {
                                 Log.d(TAG, "IN CONDITION");
                                 checkPINFromSharedPrefs(pin);
                             }
-                           // Log.d(TAG, SharedPrefsWallet.getStrings(context, Constants.PIN_KEY));
+                            // Log.d(TAG, SharedPrefsWallet.getStrings(context, Constants.PIN_KEY));
                         }
                     }
                 }
@@ -267,15 +258,15 @@ public class InputPinActivity extends AppCompatActivity {
 //
 //                        Log.d(TAG, SharedPrefsWallet.getStrings(context, Constants.PIN_KEY));
 
-                        if(signUp && confirmPin.isEmpty()){
+                        if (signUp && confirmPin.isEmpty()) {
                             counter = 0;
                             confirmPin = pin;
                             pin = "";
                             setDotsEmpty();
-                            Toast.makeText(context,"ENTER PIN AGAIN",Toast.LENGTH_SHORT).show();
-                        }else if(signUp && !confirmPin.isEmpty()){
-                            checkPINS(confirmPin,pin);
-                        }else if(signIn){
+                            Toast.makeText(context, "ENTER PIN AGAIN", Toast.LENGTH_SHORT).show();
+                        } else if (signUp && !confirmPin.isEmpty()) {
+                            checkPINS(confirmPin, pin);
+                        } else if (signIn) {
                             checkPINFromSharedPrefs(pin);
                         }
                     }
@@ -325,15 +316,15 @@ public class InputPinActivity extends AppCompatActivity {
 //
 //                        Log.d(TAG, SharedPrefsWallet.getStrings(context, Constants.PIN_KEY));
 
-                        if(signUp && confirmPin.isEmpty()){
+                        if (signUp && confirmPin.isEmpty()) {
                             counter = 0;
                             confirmPin = pin;
                             pin = "";
                             setDotsEmpty();
-                            Toast.makeText(context,"ENTER PIN AGAIN",Toast.LENGTH_SHORT).show();
-                        }else if(signUp && !confirmPin.isEmpty()){
-                            checkPINS(confirmPin,pin);
-                        }else if(signIn){
+                            Toast.makeText(context, "ENTER PIN AGAIN", Toast.LENGTH_SHORT).show();
+                        } else if (signUp && !confirmPin.isEmpty()) {
+                            checkPINS(confirmPin, pin);
+                        } else if (signIn) {
                             checkPINFromSharedPrefs(pin);
                         }
                     }
@@ -383,15 +374,15 @@ public class InputPinActivity extends AppCompatActivity {
 //
 //                        Log.d(TAG, SharedPrefsWallet.getStrings(context, Constants.PIN_KEY));
 
-                        if(signUp && confirmPin.isEmpty()){
+                        if (signUp && confirmPin.isEmpty()) {
                             counter = 0;
                             confirmPin = pin;
                             pin = "";
                             setDotsEmpty();
-                            Toast.makeText(context,"ENTER PIN AGAIN",Toast.LENGTH_SHORT).show();
-                        }else if(signUp && !confirmPin.isEmpty()){
-                            checkPINS(confirmPin,pin);
-                        }else if(signIn){
+                            Toast.makeText(context, "ENTER PIN AGAIN", Toast.LENGTH_SHORT).show();
+                        } else if (signUp && !confirmPin.isEmpty()) {
+                            checkPINS(confirmPin, pin);
+                        } else if (signIn) {
                             checkPINFromSharedPrefs(pin);
                         }
                     }
@@ -442,15 +433,15 @@ public class InputPinActivity extends AppCompatActivity {
 //
 //                        Log.d(TAG, SharedPrefsWallet.getStrings(context, Constants.PIN_KEY));
 
-                        if(signUp && confirmPin.isEmpty()){
+                        if (signUp && confirmPin.isEmpty()) {
                             counter = 0;
                             confirmPin = pin;
                             pin = "";
                             setDotsEmpty();
-                            Toast.makeText(context,"ENTER PIN AGAIN",Toast.LENGTH_SHORT).show();
-                        }else if(signUp && !confirmPin.isEmpty()){
-                            checkPINS(confirmPin,pin);
-                        }else if(signIn){
+                            Toast.makeText(context, "ENTER PIN AGAIN", Toast.LENGTH_SHORT).show();
+                        } else if (signUp && !confirmPin.isEmpty()) {
+                            checkPINS(confirmPin, pin);
+                        } else if (signIn) {
                             checkPINFromSharedPrefs(pin);
                         }
                     }
@@ -499,15 +490,15 @@ public class InputPinActivity extends AppCompatActivity {
 //                        SharedPrefsWallet.putString(context, Constants.PIN_KEY, pin);
 //
 //                        Log.d(TAG, SharedPrefsWallet.getStrings(context, Constants.PIN_KEY));
-                        if(signUp && confirmPin.isEmpty()){
+                        if (signUp && confirmPin.isEmpty()) {
                             counter = 0;
                             confirmPin = pin;
                             pin = "";
                             setDotsEmpty();
-                            Toast.makeText(context,"ENTER PIN AGAIN",Toast.LENGTH_SHORT).show();
-                        }else if(signUp && !confirmPin.isEmpty()){
-                            checkPINS(confirmPin,pin);
-                        }else if(signIn){
+                            Toast.makeText(context, "ENTER PIN AGAIN", Toast.LENGTH_SHORT).show();
+                        } else if (signUp && !confirmPin.isEmpty()) {
+                            checkPINS(confirmPin, pin);
+                        } else if (signIn) {
                             checkPINFromSharedPrefs(pin);
                         }
                     }
@@ -557,15 +548,15 @@ public class InputPinActivity extends AppCompatActivity {
 //
 //                        Log.d(TAG, SharedPrefsWallet.getStrings(context, Constants.PIN_KEY));
 
-                        if(signUp && confirmPin.isEmpty()){
+                        if (signUp && confirmPin.isEmpty()) {
                             counter = 0;
                             confirmPin = pin;
                             pin = "";
                             setDotsEmpty();
-                            Toast.makeText(context,"ENTER PIN AGAIN",Toast.LENGTH_SHORT).show();
-                        }else if(signUp && !confirmPin.isEmpty()){
-                            checkPINS(confirmPin,pin);
-                        }else if(signIn){
+                            Toast.makeText(context, "ENTER PIN AGAIN", Toast.LENGTH_SHORT).show();
+                        } else if (signUp && !confirmPin.isEmpty()) {
+                            checkPINS(confirmPin, pin);
+                        } else if (signIn) {
                             checkPINFromSharedPrefs(pin);
                         }
                     }
@@ -608,15 +599,15 @@ public class InputPinActivity extends AppCompatActivity {
 //                        SharedPrefsWallet.putString(context, Constants.PIN_KEY, pin);
 //
 //                        Log.d(TAG, SharedPrefsWallet.getStrings(context, Constants.PIN_KEY));
-                        if(signUp && confirmPin.isEmpty()){
+                        if (signUp && confirmPin.isEmpty()) {
                             counter = 0;
                             confirmPin = pin;
                             pin = "";
                             setDotsEmpty();
-                            Toast.makeText(context,"ENTER PIN AGAIN",Toast.LENGTH_SHORT).show();
-                        }else if(signUp && !confirmPin.isEmpty()){
-                            checkPINS(confirmPin,pin);
-                        }else if(signIn){
+                            Toast.makeText(context, "ENTER PIN AGAIN", Toast.LENGTH_SHORT).show();
+                        } else if (signUp && !confirmPin.isEmpty()) {
+                            checkPINS(confirmPin, pin);
+                        } else if (signIn) {
                             checkPINFromSharedPrefs(pin);
                         }
                     }
@@ -660,15 +651,15 @@ public class InputPinActivity extends AppCompatActivity {
 //                        SharedPrefsWallet.putString(context, Constants.PIN_KEY, pin);
 //
 //                        Log.d(TAG, SharedPrefsWallet.getStrings(context, Constants.PIN_KEY));
-                        if(signUp && confirmPin.isEmpty()){
+                        if (signUp && confirmPin.isEmpty()) {
                             counter = 0;
                             confirmPin = pin;
                             pin = "";
                             setDotsEmpty();
-                            Toast.makeText(context,"ENTER PIN AGAIN",Toast.LENGTH_SHORT).show();
-                        }else if(signUp && !confirmPin.isEmpty()){
-                            checkPINS(confirmPin,pin);
-                        }else if(signIn){
+                            Toast.makeText(context, "ENTER PIN AGAIN", Toast.LENGTH_SHORT).show();
+                        } else if (signUp && !confirmPin.isEmpty()) {
+                            checkPINS(confirmPin, pin);
+                        } else if (signIn) {
                             checkPINFromSharedPrefs(pin);
                         }
                     }
@@ -679,35 +670,30 @@ public class InputPinActivity extends AppCompatActivity {
         delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(counter!=0){
-                    pin = pin.substring(0,pin.length()-1);
+                if (counter != 0) {
+                    pin = pin.substring(0, pin.length() - 1);
                     counter--;
-                    if(flag1 && !flag2 && !flag3 && !flag4 && !flag5 && !flag6) {
+                    if (flag1 && !flag2 && !flag3 && !flag4 && !flag5 && !flag6) {
                         flag1 = false;
                         digit1.setBackground(getDrawable(R.drawable.ic_pin_dot_empty));
 
-                    }
-                    else if(flag2 && flag1 && !flag3 && !flag4 && !flag5 && !flag6) {
+                    } else if (flag2 && flag1 && !flag3 && !flag4 && !flag5 && !flag6) {
                         flag2 = false;
                         digit2.setBackground(getDrawable(R.drawable.ic_pin_dot_empty));
 
-                    }
-                    else if(flag1 && flag2 && flag3 && !flag4 && !flag5 && !flag6) {
+                    } else if (flag1 && flag2 && flag3 && !flag4 && !flag5 && !flag6) {
                         flag3 = false;
                         digit3.setBackground(getDrawable(R.drawable.ic_pin_dot_empty));
 
-                    }
-                    else if(flag1 && flag2 && flag3 && flag4 && !flag5 && !flag6) {
+                    } else if (flag1 && flag2 && flag3 && flag4 && !flag5 && !flag6) {
                         flag4 = false;
                         digit4.setBackground(getDrawable(R.drawable.ic_pin_dot_empty));
 
-                    }
-                    else if(flag1 && flag2 && flag3 && flag4 && flag5 && !flag6) {
+                    } else if (flag1 && flag2 && flag3 && flag4 && flag5 && !flag6) {
                         flag5 = false;
                         digit5.setBackground(getDrawable(R.drawable.ic_pin_dot_empty));
 
-                    }
-                    else if(flag1 && flag2 && flag3 && flag4 && flag5 && flag6) {
+                    } else if (flag1 && flag2 && flag3 && flag4 && flag5 && flag6) {
                         flag6 = false;
                         digit6.setBackground(getDrawable(R.drawable.ic_pin_dot_empty));
                     }
@@ -722,8 +708,8 @@ public class InputPinActivity extends AppCompatActivity {
         if (confirmPin.equals(pin)) {
             Toast.makeText(context, "PIN IS OKAY", Toast.LENGTH_SHORT).show();
             Log.d(TAG, confirmPin);
-            SharedPrefsWallet.putString(context,Constants.PIN_KEY,pin);
-            createWallet();
+            SharedPrefsWallet.putString(context, Constants.PIN_KEY, pin);
+            createWalletSaveNode();
             setDotsEmpty();
 
         } else {
@@ -735,15 +721,17 @@ public class InputPinActivity extends AppCompatActivity {
         }
     }
 
-    void checkPINFromSharedPrefs(String pin){
-        if(pin.equals(SharedPrefsWallet.getStrings(context,Constants.PIN_KEY))){
-            Toast.makeText(context,"PIN IS OKAY!",Toast.LENGTH_SHORT).show();
-            SharedPrefsWallet.putString(context,Constants.STATUS,Constants.ONLINE);
-            getBalance();
+    void checkPINFromSharedPrefs(String pin) {
+        if (pin.equals(SharedPrefsWallet.getStrings(context, Constants.PIN_KEY))) {
+            Toast.makeText(context, "PIN IS OKAY!", Toast.LENGTH_SHORT).show();
+            SharedPrefsWallet.putString(context, Constants.STATUS, Constants.ONLINE);
+            //getBalance();
+            startActivity(new Intent(InputPinActivity.this, HomeActivity.class));
+            finish();
 
 
-        }else{
-            Toast.makeText(context,"INVALID PIN",Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(context, "INVALID PIN", Toast.LENGTH_SHORT).show();
             setDotsEmpty();
             setFlagsTrue();
             this.pin = "";
@@ -771,23 +759,24 @@ public class InputPinActivity extends AppCompatActivity {
         flag6 = false;
     }
 
-    void createWallet(){
-        StringRequest stringRequest = new StringRequest(Request.Method.GET,Constants.CREATE_SAVE_NODE_WALLET_URL,
+    void createWalletSaveNode() {
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, Constants.CREATE_SAVE_NODE_WALLET_URL,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
                         Log.d(TAG, response);
-                        SharedPrefsWallet.putString(context,Constants.SAVE_NODE_WALLET_OBJECT_KEY,response);
-                        try{
+                        SharedPrefsWallet.putString(context, Constants.SAVE_NODE_WALLET_OBJECT_KEY, response);
+                        try {
                             JSONObject jsonObject = new JSONObject(response);
                             JSONObject dataObject = jsonObject.getJSONObject("data");
-                            SharedPrefsWallet.putString(context,Constants.SAVE_NODE_WALLET_ADDRESS,dataObject.optString("address"));
-                            Log.d(TAG, "Address: "+ SharedPrefsWallet.getStrings(context,Constants.SAVE_NODE_WALLET_ADDRESS));
-                        } catch (Exception e){
+                            SharedPrefsWallet.putString(context, Constants.SAVE_NODE_WALLET_ADDRESS, dataObject.optString("address"));
+                            Log.d(TAG, "Address: " + SharedPrefsWallet.getStrings(context, Constants.SAVE_NODE_WALLET_ADDRESS));
+                        } catch (Exception e) {
 
                         }
-                        startActivity(new Intent(InputPinActivity.this,MainActivity.class));
-                        finish();
+//                        startActivity(new Intent(InputPinActivity.this, MainActivity.class));
+//                        finish();
+                        createWalletBTC();
 
                     }
                 },
@@ -801,22 +790,32 @@ public class InputPinActivity extends AppCompatActivity {
         VolleySingleton.getInstance(context).addToRequestQueue(stringRequest);
     }
 
-    void getBalance(){
-        StringRequest stringRequest = new StringRequest(Request.Method.GET,Constants.GET_BALANCE_SAVE_NODE+"SPaWzGJgQ6ThNH71GF1V2qTtRdTdxVV1JG",
+    void createWalletBTC(){
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, Constants.CREATE_WALLET_BTC,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
                         Log.d(TAG, response);
-                        SharedPrefsWallet.putString(context,Constants.SAVE_NODE_WALLET_BALANCE_KEY,response);
-//                        try{
-//                            JSONObject jsonObject = new JSONObject(response);
-//                            JSONObject dataObject = jsonObject.getJSONObject("data");
-//                            SharedPrefsWallet.putString(context,Constants.SAVE_NODE_WALLET_ADDRESS,dataObject.optString("address"));
-//                            Log.d(TAG, "Address: "+ SharedPrefsWallet.getStrings(context,Constants.SAVE_NODE_WALLET_ADDRESS));
-//                        } catch (Exception e){
-//
-//                        }
-                        startActivity(new Intent(InputPinActivity.this,HomeActivity.class));
+                        try {
+                            JSONObject jsonObject = new JSONObject(response);
+                            JSONObject dataObject = jsonObject.getJSONObject("data");
+                            JSONObject walletObject = dataObject.getJSONObject("wallet");
+
+                            // for real purpose
+                            //String publicKey = walletObject.getString("public");
+                            //String privateKey = walletObject.getString("private");
+
+                            //for test net purpose
+                            String publicKey = "mrbiu1bt54R8GExkXkpgg6eL8cLYW4mMEo";
+                            String privateKey = "933wRTag5uHRjc1b8n2dyT8b6UrfGZgRHgt1Sd4H74wAKhhYLig";
+                            Log.d(TAG, "private: "+ privateKey + " public: " +publicKey);
+                            SharedPrefsWallet.putString(context,Constants.BTC_WALLET_PUBLIC_ADDRESS,publicKey);
+                            SharedPrefsWallet.putString(context,Constants.BTC_WALLET_PRIVATE_ADDRESS,privateKey);
+                            //Log.d(TAG, "Address: " + SharedPrefsWallet.getStrings(context, Constants.SAVE_NODE_WALLET_ADDRESS));
+                        } catch (Exception e) {
+
+                        }
+                        startActivity(new Intent(InputPinActivity.this, MainActivity.class));
                         finish();
 
                     }
@@ -830,5 +829,36 @@ public class InputPinActivity extends AppCompatActivity {
                 });
         VolleySingleton.getInstance(context).addToRequestQueue(stringRequest);
     }
+
+//    void getBalance(){
+//        StringRequest stringRequest = new StringRequest(Request.Method.GET,Constants.GET_BALANCE_SAVE_NODE+"SPaWzGJgQ6ThNH71GF1V2qTtRdTdxVV1JG",
+//                new Response.Listener<String>() {
+//                    @Override
+//                    public void onResponse(String response) {
+//                        Log.d(TAG, response);
+//                        SharedPrefsWallet.putString(context,Constants.SAVE_NODE_WALLET_BALANCE_KEY,response);
+////                        try{
+////                            JSONObject jsonObject = new JSONObject(response);
+////                            JSONObject dataObject = jsonObject.getJSONObject("data");
+////                            SharedPrefsWallet.putString(context,Constants.SAVE_NODE_WALLET_ADDRESS,dataObject.optString("address"));
+////                            Log.d(TAG, "Address: "+ SharedPrefsWallet.getStrings(context,Constants.SAVE_NODE_WALLET_ADDRESS));
+////                        } catch (Exception e){
+////
+////                        }
+//                        startActivity(new Intent(InputPinActivity.this,HomeActivity.class));
+//                        finish();
+//
+//                    }
+//                },
+//                new Response.ErrorListener() {
+//                    @Override
+//                    public void onErrorResponse(VolleyError error) {
+//                        Log.d(TAG, error.toString());
+////                        Log.d(TAG, String.valueOf(error.networkResponse.statusCode));
+//                    }
+//                });
+//        VolleySingleton.getInstance(context).addToRequestQueue(stringRequest);
+//    }
+
 
 }

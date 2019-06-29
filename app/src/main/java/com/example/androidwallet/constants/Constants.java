@@ -26,13 +26,31 @@ public class Constants {
 
     public static String TRANSACTION_OBJECT = "transaction";
 
+    public static String ON_STOP_KEY= "onStopKey";
+
+    public static String ON_STOP = "onStop";
+
+
     /*** URLs ***/
 
     public static String CREATE_SAVE_NODE_WALLET_URL = "http://144.217.182.179:8090/api/savenode/CreateWallet";
 
     public static String GET_BALANCE_SAVE_NODE = "http://144.217.182.179:8090/api/savenode/getBalance/";
 
-    public static String TRANSFER = "http://144.217.182.179:8090/api/savenode/transfer";
+    public static String TRANSFER_SAVE_NODE = "http://144.217.182.179:8090/api/savenode/transfer";
+
+    public static String CREATE_WALLET_BTC = "http://144.217.182.179:8085/api/btcmain/create_wallet";
+
+    public static String GET_BALANCE_BTC = "http://144.217.182.179:8085/api/btcmain/getBalance/";
+
+    public static String TRANSFER_BTC = "http://144.217.182.179:8085/api/btcmain/transfer";
+
+    public static String GET_BALANCE_BTC_TEST_NET = "http://144.217.182.179:8085/api/btc/getBalance/";
+
+    public static String CREATE_WALLET_BTC_TEST_NET = "http://144.217.182.179:8085/api/btc/create_wallet";
+
+    public static String TRANSFER_BTC_TEST_NET = "http://144.217.182.179:8085/api/btc/transfer";
+
 
     /*** wallet information ***/
 
@@ -43,6 +61,14 @@ public class Constants {
     public static String SAVE_NODE_WALLET_BALANCE_KEY = "saveNodeWalletBalance";
 
     public static String SAVE_NODE_WALLET_ADDRESS = "saveNodeWalletAddress";
+
+    //btc
+
+    public static String BTC_WALLET_PRIVATE_ADDRESS = "btcWalletPrivateKey";
+
+    public static String BTC_WALLET_BALANCE_KEY = "btcWalletBalanceKey";
+
+    public static String BTC_WALLET_PUBLIC_ADDRESS = "btcWalletPublicKey";
 
 
 
