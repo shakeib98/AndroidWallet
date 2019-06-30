@@ -28,6 +28,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.example.androidwallet.R;
 
@@ -79,10 +80,10 @@ public class HomeActivity extends AppCompatActivity {
         model.colorId = ContextCompat.getColor(context,R.color.ethereum);
         list.add(model);
 
-        model = new CryptoModel();
-        model.name = "BITCOIN CASH";
-        model.colorId = ContextCompat.getColor(context,R.color.bitcoinCash);
-        list.add(model);
+//        model = new CryptoModel();
+//        model.name = "BITCOIN CASH";
+//        model.colorId = ContextCompat.getColor(context,R.color.bitcoinCash);
+//        list.add(model);
 
         model = new CryptoModel();
         model.name = "SAVE NODE";
@@ -125,11 +126,11 @@ public class HomeActivity extends AppCompatActivity {
             JSONObject data = jsonObject.getJSONObject("data");
             JSONObject result = data.optJSONObject("result");
             if(result == null){
-                Log.d(TAG, "BALANCE: " + "0");
+                Log.d(TAG, "BALANCE SAVE NODE: " + "0");
                 return "0";
             }else{
                 String balance = result.optString("balance");
-                Log.d(TAG, "BALANCE: " + balance);
+                Log.d(TAG, "BALANCE SAVE NODE: " + balance);
                 return balance;
 
             }
@@ -146,9 +147,9 @@ public class HomeActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(String response) {
                         Log.d(TAG, response);
-                        SharedPrefsWallet.putString(context,Constants.SAVE_NODE_WALLET_BALANCE_KEY,response);
-                        progressBar.setVisibility(View.INVISIBLE);
-                        recyclerView.setVisibility(View.VISIBLE);
+                        //SharedPrefsWallet.putString(context,Constants.BTC_WALLET_BALANCE_KEY,response);
+//                        progressBar.setVisibility(View.INVISIBLE);
+//                        recyclerView.setVisibility(View.VISIBLE);
                         CryptoModel model;
                         model = new CryptoModel();
 //                        try{
@@ -163,15 +164,19 @@ public class HomeActivity extends AppCompatActivity {
 //                        finish();
                         try{
                             JSONObject jsonObject = new JSONObject(response);
-                            JSONObject dataObject = jsonObject.getJSONObject("data");
+                            JSONObject dataObject ;
 
                             /*** because sometimes API data returns null object ***/
-                            if(dataObject == null){
-                                model.balance = SharedPrefsWallet.getStrings(context,Constants.BTC_WALLET_BALANCE_KEY);
-                            }else{
+                            try{
+                                dataObject = jsonObject.getJSONObject("data");
                                 JSONObject walletObject = dataObject.getJSONObject("wallet");
-                                balance[0] = String.valueOf(walletObject.getInt("balance"));
+                                balance[0] = String.valueOf(walletObject.getDouble("balance"));
                                 SharedPrefsWallet.putString(context,Constants.BTC_WALLET_BALANCE_KEY,balance[0]);
+                                model.balance = balance[0];
+                            }catch (Exception e){
+                                model.balance = "0";
+                                Toast.makeText(context,"Error finding bitcoin balance, restart the app",Toast.LENGTH_SHORT).show();
+                                Log.d(TAG, "BTC : Data was null");
                             }
 
                             model.name = "BITCOIN";
@@ -180,7 +185,8 @@ public class HomeActivity extends AppCompatActivity {
                             model.address = SharedPrefsWallet.getStrings(context,Constants.BTC_WALLET_PUBLIC_ADDRESS);
                             list.add(model);
                             adapter.notifyDataSetChanged();
-                            Log.d(TAG, "balance: " + balance[0]);
+                            Log.d(TAG, "balance BTC: " + balance[0]);
+                            getBCHBalance();
 
 
                         }catch (Exception e){
@@ -241,11 +247,6 @@ public class HomeActivity extends AppCompatActivity {
         return  "";
     }
 
-    @Override
-    protected void onPause() {
-        super.onPause();
-        Log.d(TAG, "onPause");
-    }
     void getBalance(){
         StringRequest stringRequest = new StringRequest(Request.Method.GET,Constants.GET_BALANCE_SAVE_NODE+"SPaWzGJgQ6ThNH71GF1V2qTtRdTdxVV1JG",
                 new Response.Listener<String>() {
@@ -291,6 +292,89 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
         VolleySingleton.getInstance(context).addToRequestQueue(stringRequest);
+    }
+
+    void getBCHBalance(){
+        final String[] balance = {""};
+        StringRequest stringRequest = new StringRequest(Request.Method.GET,Constants.GET_BALANCE_BCH_TEST_NET+SharedPrefsWallet.getStrings(context,Constants.BCH_WALLET_PUBLIC_ADDRESS),
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        Log.d(TAG, response);
+                        //SharedPrefsWallet.putString(context,Constants.BCH_WALLET_PRIVATE_ADDRESS,response);
+                        progressBar.setVisibility(View.INVISIBLE);
+                        recyclerView.setVisibility(View.VISIBLE);
+                        CryptoModel model;
+                        model = new CryptoModel();
+//                        try{
+//                            JSONObject jsonObject = new JSONObject(response);
+//                            JSONObject dataObject = jsonObject.getJSONObject("data");
+//                            SharedPrefsWallet.putString(context,Constants.SAVE_NODE_WALLET_ADDRESS,dataObject.optString("address"));
+//                            Log.d(TAG, "Address: "+ SharedPrefsWallet.getStrings(context,Constants.SAVE_NODE_WALLET_ADDRESS));
+//                        } catch (Exception e){
+//
+//                        }
+//                        startActivity(new Intent(InputPinActivity.this,HomeActivity.class));
+//                        finish();
+                        try{
+                            JSONObject jsonObject = new JSONObject(response);
+                            JSONObject dataObject ;
+
+                            /*** because sometimes API data returns null object ***/
+                            try{
+                                dataObject = jsonObject.getJSONObject("data");
+                                double balanceR = dataObject.getDouble("balance");
+                                balance[0] = String.valueOf(balanceR);
+                                SharedPrefsWallet.putString(context,Constants.BCH_WALLET_BALANCE_KEY,balance[0]);
+                                model.balance = balance[0];
+                            }catch (Exception e){
+                                model.balance = "0";
+                                Toast.makeText(context,"Error finding BCH balance, restart the app",Toast.LENGTH_SHORT).show();
+                                Log.d(TAG, "BCH : Data was null");
+                            }
+
+                            model.name = "BCH";
+                            model.colorId = ContextCompat.getColor(context,R.color.bitcoinCash);
+                            // model.balance = balance[0];
+                            model.address = SharedPrefsWallet.getStrings(context,Constants.BCH_WALLET_PUBLIC_ADDRESS);
+                            list.add(model);
+                            adapter.notifyDataSetChanged();
+                            Log.d(TAG, "BCH: balance: " + balance[0]);
+
+
+                        }catch (Exception e){
+                            Log.d(TAG, e.toString());
+                        }
+
+
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.d(TAG, error.toString());
+//                        Log.d(TAG, String.valueOf(error.networkResponse.statusCode));
+                    }
+                });
+        stringRequest.setRetryPolicy(new RetryPolicy() {
+            @Override
+            public int getCurrentTimeout() {
+                return 50000;
+            }
+
+            @Override
+            public int getCurrentRetryCount() {
+                return 50000;
+            }
+
+            @Override
+            public void retry(VolleyError error) throws VolleyError {
+
+            }
+        });
+        VolleySingleton.getInstance(context).addToRequestQueue(stringRequest);
+
+        this.balance = balance[0];
     }
 
 }

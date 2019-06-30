@@ -770,7 +770,7 @@ public class InputPinActivity extends AppCompatActivity {
                             JSONObject jsonObject = new JSONObject(response);
                             JSONObject dataObject = jsonObject.getJSONObject("data");
                             SharedPrefsWallet.putString(context, Constants.SAVE_NODE_WALLET_ADDRESS, dataObject.optString("address"));
-                            Log.d(TAG, "Address: " + SharedPrefsWallet.getStrings(context, Constants.SAVE_NODE_WALLET_ADDRESS));
+                            Log.d(TAG, "SAVENODE: "+"Address: " + SharedPrefsWallet.getStrings(context, Constants.SAVE_NODE_WALLET_ADDRESS));
                         } catch (Exception e) {
 
                         }
@@ -808,15 +808,16 @@ public class InputPinActivity extends AppCompatActivity {
                             //for test net purpose
                             String publicKey = "mrbiu1bt54R8GExkXkpgg6eL8cLYW4mMEo";
                             String privateKey = "933wRTag5uHRjc1b8n2dyT8b6UrfGZgRHgt1Sd4H74wAKhhYLig";
-                            Log.d(TAG, "private: "+ privateKey + " public: " +publicKey);
+                            Log.d(TAG, "BTC: " +"private: "+ privateKey + " public: " +publicKey);
                             SharedPrefsWallet.putString(context,Constants.BTC_WALLET_PUBLIC_ADDRESS,publicKey);
                             SharedPrefsWallet.putString(context,Constants.BTC_WALLET_PRIVATE_ADDRESS,privateKey);
+                            createWalletBCH();
                             //Log.d(TAG, "Address: " + SharedPrefsWallet.getStrings(context, Constants.SAVE_NODE_WALLET_ADDRESS));
                         } catch (Exception e) {
 
                         }
-                        startActivity(new Intent(InputPinActivity.this, MainActivity.class));
-                        finish();
+//                        startActivity(new Intent(InputPinActivity.this, MainActivity.class));
+//                        finish();
 
                     }
                 },
@@ -859,6 +860,46 @@ public class InputPinActivity extends AppCompatActivity {
 //                });
 //        VolleySingleton.getInstance(context).addToRequestQueue(stringRequest);
 //    }
+
+    void createWalletBCH(){
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, Constants.CREATE_WALLET_BCH_TEST_NET,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        Log.d(TAG, response);
+                        try {
+                            JSONObject jsonObject = new JSONObject(response);
+                            JSONObject dataObject = jsonObject.getJSONObject("data");
+                            JSONObject walletObject = dataObject.getJSONObject("wallet");
+
+                            // for real purpose
+                            //String publicKey = walletObject.getString("cashAddress");
+                            //String privateKey = walletObject.getString("privateKey");
+
+                            //for test net purpose
+                            String publicKey = "qpd4jw2pumq2kv8vesgu5s7mdgglxdg75cs6vaq3xw";
+                            String privateKey = "4fb17be938b7672b3673fd23061697a7f5aae749e08f51f83fcbdd6f3ffcd938";
+                            Log.d(TAG, "BCH: "+"private: "+ privateKey + " public: " +publicKey);
+                            SharedPrefsWallet.putString(context,Constants.BCH_WALLET_PUBLIC_ADDRESS,publicKey);
+                            SharedPrefsWallet.putString(context,Constants.BCH_WALLET_PRIVATE_ADDRESS,privateKey);
+                            //Log.d(TAG, "Address: " + SharedPrefsWallet.getStrings(context, Constants.SAVE_NODE_WALLET_ADDRESS));
+                        } catch (Exception e) {
+
+                        }
+                        finish();
+                        startActivity(new Intent(InputPinActivity.this, MainActivity.class));
+
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.d(TAG, error.toString());
+//                        Log.d(TAG, String.valueOf(error.networkResponse.statusCode));
+                    }
+                });
+        VolleySingleton.getInstance(context).addToRequestQueue(stringRequest);
+    }
 
 
 }

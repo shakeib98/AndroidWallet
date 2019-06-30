@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+<RelativeLayout android:layout_width="match_parent"
+    android:layout_height="280dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:fitsSystemWindows="true"
     app:behavior_hideable="true"
     android:id="@+id/sendBottomSheet"
     app:behavior_peekHeight="0dp"
-    android:orientation="vertical"
     android:background="@drawable/bottom_sheet_background"
     app:layout_behavior="@string/bottom_sheet_behavior"
     xmlns:android="http://schemas.android.com/apk/res/android">
@@ -15,64 +15,106 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
+        android:orientation="vertical"
+        android:id="@+id/sendLayout"
+        android:visibility="gone"
+
         >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            >
+
+            <com.example.androidwallet.presenter.customViews.CustomEditText
+                android:id="@+id/editTextTo"
+                style="@style/ThemeOverlay.MaterialComponents.TextInputEditText.OutlinedBox"
+                android:layout_width="0dp"
+                android:layout_height="80dp"
+                android:layout_weight="1"
+                android:layout_margin="10dp"
+                android:hint="To:"
+                android:maxLength="255" />
+            <com.example.androidwallet.presenter.customViews.CustomButton
+                android:id="@+id/paste_button"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginEnd="@dimen/bread_margin"
+                android:layout_marginTop="8dp"
+                android:layout_weight="0.2"
+                android:background="@android:color/transparent"
+                android:minHeight="50dp"
+                android:paddingBottom="12dp"
+                android:paddingEnd="8dp"
+                android:paddingStart="8dp"
+                android:paddingTop="12dp"
+                android:text="@string/Send.pasteLabel"
+                android:textColor="@color/light_gray"
+                android:textSize="16sp"
+                app:buttonType="2"
+                app:isBreadButton="true"
+                />
+
+
+
+        </LinearLayout>
 
         <com.example.androidwallet.presenter.customViews.CustomEditText
-            android:id="@+id/editTextTo"
+            android:id="@+id/amountEditText"
             style="@style/ThemeOverlay.MaterialComponents.TextInputEditText.OutlinedBox"
-            android:layout_width="0dp"
-            android:layout_height="80dp"
-            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
             android:layout_margin="10dp"
-            android:hint="To:"
+            android:hint="Amount:"
+            android:inputType="numberDecimal"
             android:maxLength="255" />
-        <com.example.androidwallet.presenter.customViews.CustomButton
-            android:id="@+id/paste_button"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
+
+        <Button
+            android:id="@+id/send_transaction_button"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_below="@id/amountEditText"
             android:layout_gravity="center_vertical"
-            android:layout_marginEnd="@dimen/bread_margin"
-            android:layout_marginTop="8dp"
-            android:layout_weight="0.2"
-            android:background="@android:color/transparent"
-            android:minHeight="50dp"
-            android:paddingBottom="12dp"
-            android:paddingEnd="8dp"
-            android:paddingStart="8dp"
-            android:paddingTop="12dp"
-            android:text="@string/Send.pasteLabel"
-            android:textColor="@color/light_gray"
-            android:textSize="16sp"
-            app:buttonType="2"
-            app:isBreadButton="true"
+            android:layout_margin="10dp"
+            android:background="@color/blue"
+            android:text="Send Transaction"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/recLayout"
+        android:orientation="vertical"
+        android:visibility="visible"
+        >
+
+        <ImageView
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_gravity="center"
+            android:layout_margin="10dp"
+            android:id="@+id/publicKeyQR"
             />
+        <com.example.androidwallet.presenter.customViews.BaseTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/publicKey"
+            android:layout_gravity="center"
+            tools:text="HI"
+            android:textColor="#000000"
+            android:textSize="15dp"
+            android:layout_marginBottom="5dp"
+            />
+
 
 
 
     </LinearLayout>
 
-    <com.example.androidwallet.presenter.customViews.CustomEditText
-        android:id="@+id/amountEditText"
-        style="@style/ThemeOverlay.MaterialComponents.TextInputEditText.OutlinedBox"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_margin="10dp"
-        android:hint="Amount:"
-        android:inputType="numberDecimal"
-        android:maxLength="255" />
 
-    <Button
-        android:id="@+id/send_transaction_button"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_below="@id/amountEditText"
-        android:layout_gravity="center_vertical"
-        android:layout_margin="10dp"
-        android:background="@color/blue"
-        android:text="Send Transaction"
-        android:textColor="@color/white"
-        android:textSize="14sp"
-        android:textStyle="bold" />
-
-</LinearLayout>
+</RelativeLayout>

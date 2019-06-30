@@ -51,6 +51,12 @@ public class Constants {
 
     public static String TRANSFER_BTC_TEST_NET = "http://144.217.182.179:8085/api/btc/transfer";
 
+    public static String CREATE_WALLET_BCH_TEST_NET = "http://144.217.182.179:8085/api/testbch/create_wallet";
+
+    public static String GET_BALANCE_BCH_TEST_NET = "http://144.217.182.179:8085/api/testbch/getBalance/";
+
+    public static String TRANSFER_BCH_TEST_NET = "http://144.217.182.179:8085/api/testbch/transfer";
+
 
     /*** wallet information ***/
 
@@ -71,6 +77,13 @@ public class Constants {
     public static String BTC_WALLET_PUBLIC_ADDRESS = "btcWalletPublicKey";
 
 
+    //bch
+
+    public static String BCH_WALLET_PRIVATE_ADDRESS = "bchWalletPrivateKey";
+
+    public static String BCH_WALLET_BALANCE_KEY = "bchWalletBalanceKey";
+
+    public static String BCH_WALLET_PUBLIC_ADDRESS = "bchWalletPublicKey";
 
 }
 
